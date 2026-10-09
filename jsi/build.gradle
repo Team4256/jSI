@@ -4,7 +4,18 @@ plugins {
 }
 
 group = 'io.github.jacobboling2040'
-version = '0.1.0-SNAPSHOT'
+
+// The version comes from git: on a commit tagged v1.2.0 it is 1.2.0, and between
+// tags it names the commit (1.2.0-3-gabc1234), so no two different builds share a
+// version and nothing published is ever overwritten. Outside a git checkout, where
+// describe fails, it falls back to a snapshot.
+def described = providers.exec {
+    commandLine 'git', 'describe', '--tags', '--always'
+    ignoreExitValue = true
+}
+version = described.result.get().exitValue == 0
+        ? described.standardOutput.asText.get().trim().replaceFirst(/^v/, '')
+        : '0.0.0-SNAPSHOT'
 
 // The one artifact consumers depend on. It has no sources of its own: its jar
 // is the classes of the three modules below, merged, so that the unit
@@ -44,6 +55,19 @@ tasks.named('jar') {
 // what keeps the published POM free of dependencies: 'bundled' is not a
 // configuration the java component publishes.
 publishing {
+    // The Maven repository served by GitHub Pages. CI checks out the gh-pages branch
+    // and passes its maven/ directory as -PpagesRepo; publishing adds this version
+    // beside the existing ones and updates maven-metadata.xml. Without the property it
+    // publishes to build/pages-repo, to try the layout locally.
+    repositories {
+        maven {
+            name = 'pages'
+            url = providers.gradleProperty('pagesRepo')
+                    .map { file(it) }
+                    .orElse(layout.buildDirectory.dir('pages-repo').get().asFile)
+        }
+    }
+
     publications {
         jsi(MavenPublication) {
             from components.java
