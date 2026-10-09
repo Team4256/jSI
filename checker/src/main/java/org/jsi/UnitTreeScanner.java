@@ -320,7 +320,7 @@ public class UnitTreeScanner extends TreePathScanner<SIUnit, Object> {
         boolean times = node.getKind() == Kind.MULTIPLY_ASSIGNMENT;
         SIUnit result = times ? target.multiply(value) : target.divide(value);
         if (result.sameDimension(target) && result.sameScalar(target)) yield target;
-        error(at, "cannot " + (times ? "multiply" : "divide") + " " + target + " by "
+        report(at, "cannot " + (times ? "multiply" : "divide") + " " + target + " by "
                 + value + " in place: result " + result + " does not fit " + target);
         yield null;
       }
@@ -439,18 +439,24 @@ public class UnitTreeScanner extends TreePathScanner<SIUnit, Object> {
    */
   private boolean compatible(Tree at, SIUnit l, SIUnit r, String verb, String joiner) {
     if (!l.sameDimension(r)) {
-      error(at, "cannot " + verb + " " + l + " " + joiner + " " + r);
+      report(at, "cannot " + verb + " " + l + " " + joiner + " " + r);
       return false;
     }
     if (!l.sameScalar(r)) {
-      error(at, "explicit conversion required between " + l + " and " + r);
+      report(at, "explicit conversion required between " + l + " and " + r);
       return false;
     }
     return true;
   }
 
-  private void error(Tree at, String msg) {
-    trees.printMessage(Diagnostic.Kind.ERROR, msg, at, unit);
+  /**
+   * Reports a unit mistake as a warning, not an error, so that it never stops a build:
+   * robot code with a unit warning still compiles and deploys. Warnings are easy to
+   * miss in a long build log, and javac drops them under {@code -nowarn} and stops
+   * printing them after {@code -Xmaxwarns} (100 by default).
+   */
+  private void report(Tree at, String msg) {
+    trees.printMessage(Diagnostic.Kind.WARNING, msg, at, unit);
   }
 
   private boolean isArray(Tree t) {

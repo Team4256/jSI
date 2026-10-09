@@ -37,12 +37,14 @@ import com.sun.source.util.Trees;
 
 /**
  * Compiles every file under {@code src/fixtures/java} with the jSI plugin, one test per
- * file, and checks the errors javac reports against the file's
- * {@link Expect#assertError} markers.
+ * file, and checks what javac reports against the file's {@link Expect#assertError}
+ * markers.
  *
- * <p>Each reported error must fall inside the statement following a marker with the
- * same message, and every marker must be met by an error. Anything else — an error in
- * unmarked code, or a marker nothing satisfied — fails the file.
+ * <p>The checker reports unit mistakes as warnings, so warnings count as well as errors.
+ * Each must fall inside the statement following a marker with the same message, and
+ * every marker must be met. Anything else — a warning or error in unmarked code, which
+ * includes ordinary Java mistakes and javac's own warnings, or a marker nothing
+ * satisfied — fails the file.
  */
 class FixtureTest {
   private static final Path FIXTURES = Path.of("src/fixtures/java");
@@ -92,7 +94,7 @@ class FixtureTest {
     List<String> problems = new ArrayList<>();
 
     for (Diagnostic<?> d : all) {
-      if (d.getKind() != Diagnostic.Kind.ERROR) continue;
+      if (d.getKind() != Diagnostic.Kind.ERROR && d.getKind() != Diagnostic.Kind.WARNING) continue;
       Expected match = unmet.stream().filter(e -> e.metBy(d)).findFirst().orElse(null);
       if (match != null) {
         unmet.remove(match);
