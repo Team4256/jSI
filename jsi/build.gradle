@@ -1,0 +1,80 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'io.github.jacobboling2040'
+version = '0.1.0-SNAPSHOT'
+
+// The one artifact consumers depend on. It has no sources of its own: its jar
+// is the classes of the three modules below, merged, so that the unit
+// annotations, the runtime conversions and the javac plugin (with its
+// META-INF/services registration) all arrive through a single dependency.
+//
+// The modules stay separate for development; this is only how they ship.
+
+configurations {
+    bundled {
+        canBeConsumed = false
+        canBeResolved = true
+        transitive = false
+    }
+}
+
+dependencies {
+    bundled project(':annotations')
+    bundled project(':runtime')
+    bundled project(':checker')
+}
+
+def bundledJars = configurations.bundled
+
+tasks.named('jar') {
+    // The closure below hides the module jars from Gradle, so without this it
+    // may run before they are built: always from a clean checkout, and racily
+    // in a parallel build.
+    dependsOn bundledJars
+    from { bundledJars.collect { zipTree(it) } }
+    exclude 'META-INF/MANIFEST.MF' // each module's own; the jar task writes one
+}
+
+// Consumers add this one coordinate twice: to implementation, for the
+// annotations and conversions, and to annotationProcessor, so javac finds the
+// plugin even when the project has other annotation processors. Bundling is
+// what keeps the published POM free of dependencies: 'bundled' is not a
+// configuration the java component publishes.
+publishing {
+    publications {
+        jsi(MavenPublication) {
+            from components.java
+            pom {
+                name = 'jSI'
+                description = 'Compile-time SI unit checking for Java, at zero runtime cost.'
+                url = 'https://github.com/jacobboling2040/jSI'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'jacobboling2040'
+                        name = 'Jacob Boling'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/jacobboling2040/jSI'
+                    connection = 'scm:git:git://github.com/jacobboling2040/jSI.git'
+                    developerConnection = 'scm:git:ssh://git@github.com/jacobboling2040/jSI.git'
+                }
+            }
+        }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}

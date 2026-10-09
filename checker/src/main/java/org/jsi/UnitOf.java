@@ -36,7 +36,8 @@ public final class UnitOf {
     TypeElement annoType = (TypeElement) mirror.getAnnotationType().asElement();
     Dimension d = annoType.getAnnotation(Dimension.class);
     if (d == null) return null;
-    return new SIUnit(d.s(), d.m(), d.kg(), d.A(), d.K(), d.mol(), d.cd(), d.scalar());
+    return new SIUnit(d.s(), d.m(), d.kg(), d.A(), d.K(), d.mol(), d.cd(), d.scalar())
+        .named(annoType.getSimpleName().toString());
   }
 
   /**

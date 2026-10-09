@@ -5,10 +5,17 @@ plugins {
 
 rootProject.name = 'jSI'
 
-// Annotations only. Consumers put this on their compile classpath (compileOnly);
-// nothing here is needed at runtime.
+// Consumers depend on 'jsi' alone, which bundles the three modules below into
+// one jar. The modules stay separate so each keeps its own dependencies.
+
+// Annotations only. No dependencies, by design.
 include('annotations')
 
-// Compile-time machinery: the SIUnit model, the annotation processor, and
-// (next) the javac plugin. Consumers put this on their annotation processor path.
+// Compile-time machinery: the SIUnit model and the javac plugin.
 include('checker')
+
+// Runtime helpers that ship in consumers' programs: unit conversions.
+include('runtime')
+
+// The single published artifact: the three modules above in one jar.
+include('jsi')

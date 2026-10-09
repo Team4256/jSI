@@ -1,0 +1,17 @@
+// Zed tasks: run with the "task: spawn" command (alt-shift-t by default),
+// or "task: rerun" (alt-t) to repeat the last one.
+[
+  {
+    "label": "jSI: test fixtures",
+    "command": "./gradlew",
+    "args": [":checker:test", "--console=plain"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    // Gradle 9.7 cannot run on the default JDK 27. Drop this once the daemon
+    // JVM is pinned with `./gradlew updateDaemonJvm --jvm-version=21`.
+    "env": {
+      "JAVA_HOME": "/home/jacob/.gradle/jdks/eclipse_adoptium-21-amd64-linux.2"
+    },
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  }
+]

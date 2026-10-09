@@ -1,0 +1,18 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    // The conversions' signatures carry unit annotations. Consumers get both
+    // through the bundled 'jsi' jar rather than depending on this module.
+    api project(':annotations')
+}
+
+// Not compiled with the jSI checker: it has no notion of a sanctioned
+// conversion yet, and would reject every function here for changing scale.
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}

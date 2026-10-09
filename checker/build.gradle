@@ -6,10 +6,46 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    // Example code written against the unit annotations, which the tests compile
+    // with the plugin and check against its assertError markers. A source set
+    // only so the IDE resolves the annotations and markers; Gradle never builds it.
+    fixtures
+}
+
 dependencies {
     // Needed to read @Dimension off the unit annotations. Not exposed to
     // consumers of the checker, hence implementation rather than api.
     implementation project(':annotations')
+
+    fixturesImplementation project(':annotations')
+    fixturesImplementation sourceSets.test.output // for Expect.assertError
+
+    // So fixtures can call the conversions, as real code would.
+    fixturesImplementation project(':runtime')
+    testRuntimeOnly project(':runtime')
+}
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter('6.0.1')
+        }
+    }
+}
+
+tasks.named('test') {
+    // The fixtures are read at test time rather than compiled into the tests, so
+    // declare them; otherwise editing one leaves the test task up to date.
+    inputs.dir('src/fixtures/java').withPathSensitivity(PathSensitivity.RELATIVE)
+
+    // Print each failing fixture's missed/unexpected list in the console, not
+    // just in the HTML report.
+    testLogging {
+        events 'failed'
+        exceptionFormat = 'full'
+        showStackTraces = false
+    }
 }
 
 java {
