@@ -36,4 +36,7 @@ public final class SIPrefixs {
   public static final double YOCTO  = 1e-24;
   public static final double RONTO  = 1e-27;
   public static final double QUECTO = 1e-30;
+
+  public static final double DEGREE = Math.PI / 180;
+  public static final double ROTATION = 2 * Math.PI;
 }

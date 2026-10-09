@@ -245,9 +245,24 @@ public class Units {
   @Dimension(s = -1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface rad_s {} //radian per second
 
+  @Dimension(s = -1, scalar = SIPrefixs.DEGREE ) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  public @interface deg_s {} //radian per second
+
+  @Dimension(s = -1, scalar = SIPrefixs.ROTATION) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  public @interface rot_s {} //radian per second
+
   //Acceleration
   @Dimension(m = 1, s = -2) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface m_s2 {} // meters per second per second
+
+  @Dimension(s = -2) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  public @interface rad_s2 {} //radian per second
+
+  @Dimension(s = -2, scalar = SIPrefixs.DEGREE ) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  public @interface deg_s2 {} //radian per second
+
+  @Dimension(s = -2, scalar = SIPrefixs.ROTATION) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  public @interface rot_s2 {} //radian per second
 
   // Density
   @Dimension(kg = 1, m = -3) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
@@ -312,9 +327,9 @@ public class Units {
   //Angles
   @Dimension() @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface rad {} //radian
-  @Dimension(scalar = Math.PI / 180) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  @Dimension(scalar = SIPrefixs.DEGREE) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface deg {} //degree
-  @Dimension(scalar = 2 * Math.PI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  @Dimension(scalar = SIPrefixs.ROTATION) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface rot {} //rotations
   @Dimension() @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface sr {} //steradian
