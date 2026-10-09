@@ -242,6 +242,9 @@ public class Units {
   @Dimension(m = 1, s = -1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface m_s {} //meters per second
 
+  @Dimension(s = -1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  public @interface rad_s {} //radian per second
+
   //Acceleration
   @Dimension(m = 1, s = -2) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface m_s2 {} // meters per second per second
