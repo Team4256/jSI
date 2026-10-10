@@ -355,7 +355,9 @@ public class UnitTreeScanner extends TreePathScanner<SIUnit, Object> {
 
       case LESS_THAN, GREATER_THAN, LESS_THAN_EQUAL,
             GREATER_THAN_EQUAL, EQUAL_TO, NOT_EQUAL_TO -> {
-        compatible(node, l, r, "compare");
+        if (!isZero(node.getLeftOperand()) && !isZero(node.getRightOperand())) {
+          compatible(node, l, r, "compare");
+        }
         yield SIUnit.DIMENSIONLESS; // the boolean result carries no unit
       }
 
@@ -457,6 +459,26 @@ public class UnitTreeScanner extends TreePathScanner<SIUnit, Object> {
    */
   private void report(Tree at, String msg) {
     trees.printMessage(Diagnostic.Kind.WARNING, msg, at, unit);
+  }
+
+  /**
+   * Whether an expression is a literal zero: {@code 0}, {@code 0.0}, {@code -0} or any of
+   * them in parentheses. Comparing a quantity with zero tests only its sign, which means
+   * the same in every unit and scale (0 rot/s is 0 rad/s is 0 m/s), so it is the one
+   * bare number a comparison accepts. {@code diff <= 5} stays an error: 5 of what?
+   *
+   * <p>Only a literal counts. A variable or constant holding zero could hold anything,
+   * and arithmetic such as {@code d + 0} is unaffected.
+   */
+  private static boolean isZero(ExpressionTree e) {
+    while (e instanceof ParenthesizedTree paren) e = paren.getExpression();
+    if (e instanceof UnaryTree unary
+        && (unary.getKind() == Kind.UNARY_MINUS || unary.getKind() == Kind.UNARY_PLUS)) {
+      return isZero(unary.getExpression());
+    }
+    return e instanceof LiteralTree literal
+        && literal.getValue() instanceof Number n
+        && n.doubleValue() == 0;
   }
 
   private boolean isArray(Tree t) {
