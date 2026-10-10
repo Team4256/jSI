@@ -197,7 +197,7 @@ public class Units {
   @Dimension() @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface sr {} //steradian
 
-  // Empirical Units
+  // Imperial Units
 
   // Distance
   @Dimension(m = 1, scalar = ImperialFactors.INCH) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
