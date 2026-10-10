@@ -153,7 +153,7 @@ public class Units {
 
   //Frequency
   @Dimension(s = -1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Hz {} //Watts
+  public @interface Hz {} //Hertz
 
   // Pressure
   @Dimension(kg =  1, m = -1, s = -2) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
@@ -164,7 +164,7 @@ public class Units {
   public @interface C {} //Coulomb
 
   // Electrical Potential Difference
-  @Dimension(kg = 1, m = 2, s = -3, A = -2) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  @Dimension(kg = 1, m = 2, s = -3, A = -1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface V {} //Volt
 
   // Electrical Resistance
@@ -176,7 +176,7 @@ public class Units {
   public @interface F {} //Farad
 
   // Inducatance
-  @Dimension(kg = 1, m = 2, s = -2, A = 2) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  @Dimension(kg = 1, m = 2, s = -2, A = -2) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface H {} //Henery
 
   // Magnetic Flux Density
