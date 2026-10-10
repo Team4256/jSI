@@ -31,49 +31,19 @@ public class Units {
   @Dimension(s = 1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface s {} //second
 
-  @Dimension(s = 1, scalar = TERA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Ts {} //terasecond
-  @Dimension(s = 1, scalar = GIGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Gs {} //gigasecond
-  @Dimension(s = 1, scalar = MEGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Ms {} //megasecond
-  @Dimension(s = 1, scalar = KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface ks {} //kilosecond
-  @Dimension(s = 1, scalar = HECTO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface hs {} //hectosecond
-  @Dimension(s = 1, scalar = DECA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface das {} //decasecond
-  @Dimension(s = 1, scalar = DECI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface ds {} //decisecond
-  @Dimension(s = 1, scalar = CENTI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface cs {} //centisecond
   @Dimension(s = 1, scalar = MILLI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface ms {} //millisecond
   @Dimension(s = 1, scalar = MICRO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface us {} //microsecond
   @Dimension(s = 1, scalar = NANO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface ns {} //nanosecond
-  @Dimension(s = 1, scalar = PICO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface ps {} //picosecond
 
   //Length
   @Dimension(m = 1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface m {} //meters
 
-  @Dimension(m = 1, scalar = TERA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Tm {} //terameter
-  @Dimension(m = 1, scalar = GIGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Gm {} //gigameter
-  @Dimension(m = 1, scalar = MEGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Mm {} //megameter
   @Dimension(m = 1, scalar = KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface km {} //kilometer
-  @Dimension(m = 1, scalar = HECTO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface hm {} //hectometer
-  @Dimension(m = 1, scalar = DECA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface dam {} //decameter
-  @Dimension(m = 1, scalar = DECI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface dm {} //decimeter
   @Dimension(m = 1, scalar = CENTI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface cm {} //centimeter
   @Dimension(m = 1, scalar = MILLI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
@@ -82,8 +52,6 @@ public class Units {
   public @interface um {} //micrometer
   @Dimension(m = 1, scalar = NANO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface nm {} //nanometer
-  @Dimension(m = 1, scalar = PICO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface pm {} //picometer
 
   //Mass
   @Dimension(kg = 1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
@@ -91,144 +59,39 @@ public class Units {
   @Dimension(kg = 1, scalar = 1 / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface g {} //gram
 
-  @Dimension(kg = 1, scalar = TERA / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Tg {} //teragram
-  @Dimension(kg = 1, scalar = GIGA / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Gg {} //gigagram
-  @Dimension(kg = 1, scalar = MEGA / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Mg {} //megagram
-  @Dimension(kg = 1, scalar = HECTO / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface hg {} //hectogram
-  @Dimension(kg = 1, scalar = DECA / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface dag {} //decagram
-  @Dimension(kg = 1, scalar = DECI / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface dg {} //decigram
-  @Dimension(kg = 1, scalar = CENTI / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface cg {} //centigram
   @Dimension(kg = 1, scalar = MILLI / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface mg {} //milligram
   @Dimension(kg = 1, scalar = MICRO / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface ug {} //microgram
-  @Dimension(kg = 1, scalar = NANO / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface ng {} //nanogram
-  @Dimension(kg = 1, scalar = PICO / KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface pg {} //picogram
 
   //Electric Current
   @Dimension(A = 1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface A {} //ampere
 
-  @Dimension(A = 1, scalar = TERA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface TA {} //teraampere
-  @Dimension(A = 1, scalar = GIGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface GA {} //gigaampere
-  @Dimension(A = 1, scalar = MEGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface MA {} //megaampere
-  @Dimension(A = 1, scalar = KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface kA {} //kiloampere
-  @Dimension(A = 1, scalar = HECTO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface hA {} //hectoampere
-  @Dimension(A = 1, scalar = DECA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface daA {} //decaampere
-  @Dimension(A = 1, scalar = DECI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface dA {} //deciampere
-  @Dimension(A = 1, scalar = CENTI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface cA {} //centiampere
   @Dimension(A = 1, scalar = MILLI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface mA {} //milliampere
   @Dimension(A = 1, scalar = MICRO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface uA {} //microampere
-  @Dimension(A = 1, scalar = NANO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface nA {} //nanoampere
-  @Dimension(A = 1, scalar = PICO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface pA {} //picoampere
 
   //Thermodynamic Temperature
   @Dimension(K = 1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface K {} //kelvin
 
-  @Dimension(K = 1, scalar = TERA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface TK {} //terakelvin
-  @Dimension(K = 1, scalar = GIGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface GK {} //gigakelvin
-  @Dimension(K = 1, scalar = MEGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface MK {} //megakelvin
-  @Dimension(K = 1, scalar = KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface kK {} //kilokelvin
-  @Dimension(K = 1, scalar = HECTO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface hK {} //hectokelvin
-  @Dimension(K = 1, scalar = DECA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface daK {} //decakelvin
-  @Dimension(K = 1, scalar = DECI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface dK {} //decikelvin
-  @Dimension(K = 1, scalar = CENTI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface cK {} //centikelvin
-  @Dimension(K = 1, scalar = MILLI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface mK {} //millikelvin
-  @Dimension(K = 1, scalar = MICRO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface uK {} //microkelvin
-  @Dimension(K = 1, scalar = NANO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface nK {} //nanokelvin
-  @Dimension(K = 1, scalar = PICO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface pK {} //picokelvin
-
   //Amount of Substance
   @Dimension(mol = 1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface mol {} //mol
 
-  @Dimension(mol = 1, scalar = TERA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Tmol {} //teramole
-  @Dimension(mol = 1, scalar = GIGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Gmol {} //gigamole
-  @Dimension(mol = 1, scalar = MEGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Mmol {} //megamole
-  @Dimension(mol = 1, scalar = KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface kmol {} //kilomole
-  @Dimension(mol = 1, scalar = HECTO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface hmol {} //hectomole
-  @Dimension(mol = 1, scalar = DECA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface damol {} //decamole
-  @Dimension(mol = 1, scalar = DECI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface dmol {} //decimole
-  @Dimension(mol = 1, scalar = CENTI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface cmol {} //centimole
   @Dimension(mol = 1, scalar = MILLI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface mmol {} //millimole
   @Dimension(mol = 1, scalar = MICRO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface umol {} //micromole
-  @Dimension(mol = 1, scalar = NANO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface nmol {} //nanomole
-  @Dimension(mol = 1, scalar = PICO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface pmol {} //picomole
 
   //Luminous Intensity
   @Dimension(cd = 1) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface cd {} //candela
 
-  @Dimension(cd = 1, scalar = TERA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Tcd {} //teracandela
-  @Dimension(cd = 1, scalar = GIGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Gcd {} //gigacandela
-  @Dimension(cd = 1, scalar = MEGA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface Mcd {} //megacandela
-  @Dimension(cd = 1, scalar = KILO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface kcd {} //kilocandela
-  @Dimension(cd = 1, scalar = HECTO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface hcd {} //hectocandela
-  @Dimension(cd = 1, scalar = DECA) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface dacd {} //decacandela
-  @Dimension(cd = 1, scalar = DECI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface dcd {} //decicandela
-  @Dimension(cd = 1, scalar = CENTI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface ccd {} //centicandela
   @Dimension(cd = 1, scalar = MILLI) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface mcd {} //millicandela
-  @Dimension(cd = 1, scalar = MICRO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface ucd {} //microcandela
-  @Dimension(cd = 1, scalar = NANO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface ncd {} //nanocandela
-  @Dimension(cd = 1, scalar = PICO) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface pcd {} //picocandela
 
   // Area
   @Dimension(m = 2) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
@@ -246,23 +109,23 @@ public class Units {
   public @interface rad_s {} //radian per second
 
   @Dimension(s = -1, scalar = SIPrefixs.DEGREE ) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface deg_s {} //radian per second
+  public @interface deg_s {} //degree per second
 
   @Dimension(s = -1, scalar = SIPrefixs.ROTATION) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface rot_s {} //radian per second
+  public @interface rot_s {} //rotation per second
 
   //Acceleration
   @Dimension(m = 1, s = -2) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface m_s2 {} // meters per second per second
 
   @Dimension(s = -2) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface rad_s2 {} //radian per second
+  public @interface rad_s2 {} //radian per second per second
 
   @Dimension(s = -2, scalar = SIPrefixs.DEGREE ) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface deg_s2 {} //radian per second
+  public @interface deg_s2 {} //degree per second per second
 
   @Dimension(s = -2, scalar = SIPrefixs.ROTATION) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
-  public @interface rot_s2 {} //radian per second
+  public @interface rot_s2 {} //rotation per second per second
 
   // Density
   @Dimension(kg = 1, m = -3) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
@@ -333,4 +196,14 @@ public class Units {
   public @interface rot {} //rotations
   @Dimension() @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
   public @interface sr {} //steradian
+
+  // Empirical Units
+
+  // Distance
+  @Dimension(m = 1, scalar = ImperialFactors.INCH) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  public @interface in {} //Inches
+  @Dimension(m = 1, scalar = ImperialFactors.FOOT) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  public @interface ft {} //feet
+  @Dimension(m = 1, scalar = ImperialFactors.YARD) @Retention(CLASS) @Target({FIELD, LOCAL_VARIABLE, METHOD, PARAMETER, TYPE_USE})
+  public @interface yd {} //yard
 }
