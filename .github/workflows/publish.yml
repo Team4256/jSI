@@ -1,43 +1,46 @@
 name: Publish
 
-# Pushing a tag such as v0.1.0 builds and tests jSI, then publishes version 0.1.0
+# Pushing a tag such as v0.1.0 builds and tests jSI, then publishes it
 # to the Maven repository served by GitHub Pages:
 #
-#   https://jacobboling2040.github.io/jSI/maven
+# https://team4256.github.io/jSI/maven
 #
-# Versions accumulate on the gh-pages branch; each run adds one and never touches
-# the others, so code pinned to an old version keeps building.
+# Published versions are never replaced.
+
 on:
   push:
-    tags: ['v*']
+    tags:
+      - 'v*'
 
 permissions:
-  contents: write # to push the gh-pages branch
+  contents: write
 
 concurrency:
-  group: publish # two tags pushed together must not race on gh-pages
+  group: publish
   cancel-in-progress: false
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # full history and tags, which the version is derived from
+          fetch-depth: 0
 
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
+          java-version: '17'
 
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Check the version matches the tag
         run: |
           described=$(git describe --tags --always)
+
           if [ "$described" != "$GITHUB_REF_NAME" ]; then
-            echo "git describe gives $described, not $GITHUB_REF_NAME; is another tag on this commit?"
+            echo "git describe gives $described, not $GITHUB_REF_NAME"
             exit 1
           fi
 
@@ -49,27 +52,32 @@ jobs:
           if git fetch origin gh-pages; then
             git worktree add pages origin/gh-pages
           else
-            # First publish: start gh-pages as an empty branch with no history.
             git worktree add --detach pages
             git -C pages checkout --orphan gh-pages
             git -C pages rm -rf --quiet .
           fi
-          touch pages/.nojekyll # serve the files as they are, without Jekyll
 
-      - name: Publish
+          touch pages/.nojekyll
+
+      - name: Publish Maven repository
         run: |
           version="${GITHUB_REF_NAME#v}"
+
           if [ -e "pages/maven/io/github/jacobboling2040/jsi/$version" ]; then
-            echo "$version is already published; published versions are never replaced."
+            echo "$version is already published."
             exit 1
           fi
-          ./gradlew :jsi:publishJsiPublicationToPagesRepository -PpagesRepo="$PWD/pages/maven"
+
+          ./gradlew :jsi:publishJsiPublicationToPagesRepository \
+            -PpagesRepo="$PWD/pages/maven"
 
       - name: Push gh-pages
         run: |
           cd pages
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add -A
           git commit --quiet -m "Publish $GITHUB_REF_NAME"
           git push origin HEAD:gh-pages

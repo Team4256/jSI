@@ -5,24 +5,14 @@ plugins {
 
 group = 'io.github.jacobboling2040'
 
-// The version comes from git: on a commit tagged v1.2.0 it is 1.2.0, and between
-// tags it names the commit (1.2.0-3-gabc1234), so no two different builds share a
-// version and nothing published is ever overwritten. Outside a git checkout, where
-// describe fails, it falls back to a snapshot.
 def described = providers.exec {
     commandLine 'git', 'describe', '--tags', '--always'
     ignoreExitValue = true
 }
+
 version = described.result.get().exitValue == 0
         ? described.standardOutput.asText.get().trim().replaceFirst(/^v/, '')
         : '0.0.0-SNAPSHOT'
-
-// The one artifact consumers depend on. It has no sources of its own: its jar
-// is the classes of the three modules below, merged, so that the unit
-// annotations, the runtime conversions and the javac plugin (with its
-// META-INF/services registration) all arrive through a single dependency.
-//
-// The modules stay separate for development; this is only how they ship.
 
 configurations {
     bundled {
@@ -41,24 +31,12 @@ dependencies {
 def bundledJars = configurations.bundled
 
 tasks.named('jar') {
-    // The closure below hides the module jars from Gradle, so without this it
-    // may run before they are built: always from a clean checkout, and racily
-    // in a parallel build.
     dependsOn bundledJars
     from { bundledJars.collect { zipTree(it) } }
-    exclude 'META-INF/MANIFEST.MF' // each module's own; the jar task writes one
+    exclude 'META-INF/MANIFEST.MF'
 }
 
-// Consumers add this one coordinate twice: to implementation, for the
-// annotations and conversions, and to annotationProcessor, so javac finds the
-// plugin even when the project has other annotation processors. Bundling is
-// what keeps the published POM free of dependencies: 'bundled' is not a
-// configuration the java component publishes.
 publishing {
-    // The Maven repository served by GitHub Pages. CI checks out the gh-pages branch
-    // and passes its maven/ directory as -PpagesRepo; publishing adds this version
-    // beside the existing ones and updates maven-metadata.xml. Without the property it
-    // publishes to build/pages-repo, to try the layout locally.
     repositories {
         maven {
             name = 'pages'
@@ -71,26 +49,30 @@ publishing {
     publications {
         jsi(MavenPublication) {
             from components.java
+
             pom {
                 name = 'jSI'
                 description = 'Compile-time SI unit checking for Java, at zero runtime cost.'
-                url = 'https://github.com/jacobboling2040/jSI'
+                url = 'https://github.com/Team4256/jSI'
+
                 licenses {
                     license {
                         name = 'MIT License'
                         url = 'https://opensource.org/licenses/MIT'
                     }
                 }
+
                 developers {
                     developer {
                         id = 'jacobboling2040'
                         name = 'Jacob Boling'
                     }
                 }
+
                 scm {
-                    url = 'https://github.com/jacobboling2040/jSI'
-                    connection = 'scm:git:git://github.com/jacobboling2040/jSI.git'
-                    developerConnection = 'scm:git:ssh://git@github.com/jacobboling2040/jSI.git'
+                    url = 'https://github.com/Team4256/jSI'
+                    connection = 'scm:git:git://github.com/Team4256/jSI.git'
+                    developerConnection = 'scm:git:ssh://git@github.com/Team4256/jSI.git'
                 }
             }
         }

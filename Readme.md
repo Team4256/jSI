@@ -12,12 +12,12 @@ AdvantageKit, ...).
 
 ```groovy
 repositories {
-    maven { url = 'https://jacobboling2040.github.io/jSI/maven' }
+    maven { url = 'https://team4256.github.io/jSI/maven' }
 }
 
 dependencies {
-    implementation      'io.github.jacobboling2040:jsi:0.1.0'
-    annotationProcessor 'io.github.jacobboling2040:jsi:0.1.0'
+    implementation      'io.github.jacobboling2040:jsi:0.1.0-alpha-3'
+    annotationProcessor 'io.github.jacobboling2040:jsi:0.1.0-alpha-3'
 }
 ```
 
