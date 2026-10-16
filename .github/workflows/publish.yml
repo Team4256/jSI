@@ -1,11 +1,7 @@
 name: Publish
 
-# Pushing a tag such as v0.1.0 builds and tests jSI, then publishes it
-# to the Maven repository served by GitHub Pages:
-#
+# Publishes tagged versions to the Maven repository served by GitHub Pages:
 # https://team4256.github.io/jSI/maven
-#
-# Published versions are never replaced.
 
 on:
   push:
@@ -14,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: publish
@@ -81,3 +78,33 @@ jobs:
           git add -A
           git commit --quiet -m "Publish $GITHUB_REF_NAME"
           git push origin HEAD:gh-pages
+
+      - name: Check out main for README update
+        if: ${{ !contains(github.ref_name, '-') }}
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Update README version
+        if: ${{ !contains(github.ref_name, '-') }}
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          version="${TAG_NAME#v}"
+
+          sed -i -E \
+            "s/(io\.github\.jacobboling2040:jsi:)[^']+/\1${version}/g" \
+            Readme.md
+
+      - name: Open README update pull request
+        if: ${{ !contains(github.ref_name, '-') }}
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: docs/update-version-${{ github.ref_name }}
+          base: main
+          commit-message: "Update README for ${{ github.ref_name }}"
+          title: "Update README for ${{ github.ref_name }}"
+          body: |
+            Automatically update the README dependency version
+            to `${{ github.ref_name }}`.
