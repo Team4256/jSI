@@ -16,8 +16,8 @@ repositories {
 }
 
 dependencies {
-    implementation      'io.github.jacobboling2040:jsi:0.1.0-alpha-3'
-    annotationProcessor 'io.github.jacobboling2040:jsi:0.1.0-alpha-3'
+    implementation      'io.github.jacobboling2040:jsi:0.1.3'
+    annotationProcessor 'io.github.jacobboling2040:jsi:0.1.3'
 }
 ```
 
