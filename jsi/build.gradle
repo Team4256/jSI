@@ -10,9 +10,20 @@ def described = providers.exec {
     ignoreExitValue = true
 }
 
-version = described.result.get().exitValue == 0
-        ? described.standardOutput.asText.get().trim().replaceFirst(/^v/, '')
-        : '0.0.0-SNAPSHOT'
+def githubTag = System.getenv('GITHUB_REF_NAME')
+
+if (githubTag) {
+    version = githubTag.replaceFirst(/^v/, '')
+} else {
+    def described = providers.exec {
+        commandLine 'git', 'describe', '--tags', '--always'
+        ignoreExitValue = true
+    }
+
+    version = described.result.get().exitValue == 0
+            ? described.standardOutput.asText.get().trim().replaceFirst(/^v/, '')
+            : '0.0.0-SNAPSHOT'
+}
 
 configurations {
     bundled {
