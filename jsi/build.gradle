@@ -5,11 +5,6 @@ plugins {
 
 group = 'io.github.jacobboling2040'
 
-def described = providers.exec {
-    commandLine 'git', 'describe', '--tags', '--always'
-    ignoreExitValue = true
-}
-
 def githubTag = System.getenv('GITHUB_REF_NAME')
 
 if (githubTag) {
@@ -43,7 +38,13 @@ def bundledJars = configurations.bundled
 
 tasks.named('jar') {
     dependsOn bundledJars
-    from { bundledJars.collect { zipTree(it) } }
+
+    from {
+        bundledJars.collect {
+            zipTree(it)
+        }
+    }
+
     exclude 'META-INF/MANIFEST.MF'
 }
 
@@ -51,6 +52,7 @@ publishing {
     repositories {
         maven {
             name = 'pages'
+
             url = providers.gradleProperty('pagesRepo')
                     .map { file(it) }
                     .orElse(layout.buildDirectory.dir('pages-repo').get().asFile)
